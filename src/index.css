@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+button:not(.css-dev-only-do-not-override-pr0fja).ant-btn-primary {
+    background-color: #1677ff;
+}
+
+:root {
+    --color-white: #ffffff;
+    --color-black: #rgb(39, 39, 42);
+    --color-red-primary: rgb(255, 57, 69);
+    --color-blue-primary: rgb(10, 104, 255);
+    --color-blue-hover: rgba(10, 104, 255, 0.2);
+    --color-gray-200: #848388;
+    --color-gray-100: rgb(221 221 227);
+
+    --fs-1: 4.2rem;
+    --fs-2: 3.8rem;
+    --fs-3: 3.2rem;
+    --fs-4: 2.5rem;
+    --fs-5: 2.4rem;
+    --fs-6: 2rem;
+    --fs-7: 1.8rem;
+    --fs-8: 1.5rem;
+    --ff-source-sans-pro: 'Source Sans Pro', sans-serif;
+    --ff-beviet: 'Be Vietnam Pro', sans-serif;
+}
+
+html {
+    font-family: var(--ff-beviet);
+    font-size: 10px;
+    scroll-behavior: smooth;
+    line-height: 1.15;
+    /* background-color: #efefef; */
+}
+
+body {
+    color: var(--color-black);
+    font-size: 1.4rem;
+    box-sizing: border-box;
+}
+
+@media (min-width: 0) and (max-width: 739px) {}
+
+@media (min-width: 740px) and (max-width: 1023px) {}
