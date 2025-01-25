@@ -57,7 +57,7 @@ Sau đó, cập nhật các lệnh build, start, và dev để thêm môi trư�
 Để build ứng dụng cho môi trường staging:
 
 ```
-yarn build:staging
+npm run build
 ```
 
 ## Build and Start
@@ -65,15 +65,13 @@ yarn build:staging
 Dùng lệnh này để build và chạy dự án cho môi trường staging:
 
 ```
-yarn start:staging
+npm run dev:staging
 ```
 
 ## Run Dev Mode
 
-Để chạy ứng dụng trong chế độ phát triển ở môi trường staging
-
 ```
-yarn dev:staging
+npm run dev
 ```
 
 ---
