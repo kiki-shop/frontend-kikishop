@@ -1,5 +1,7 @@
 # 1.0.0
 
+url: https://frontend-kikishop.onrender.com/
+
 # 1. Những chức năng chính ở phiên bản này
 
 ### Add
