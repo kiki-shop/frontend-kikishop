@@ -1,32 +1,37 @@
 # --- Build stage ---
-FROM node:20-alpine AS builder
+    FROM node:20-alpine AS builder
 
-# Tạo thư mục làm việc
-WORKDIR /app
-
-# Copy package.json và lock file
-COPY package.json package-lock.json* pnpm-lock.yaml* yarn.lock* ./
-
-# Cài đặt dependency (ưu tiên dùng npm vì bạn dùng package-lock.json)
-RUN npm install
-
-# Copy toàn bộ source code vào container
-COPY . .
-
-# Build ứng dụng
-RUN npm run build
-
-# --- Production stage ---
-FROM nginx:alpine
-
-# Copy file build từ stage trước vào thư mục Nginx
-COPY --from=builder /app/dist /usr/share/nginx/html
-
-# Copy custom nginx config nếu cần (nếu bạn dùng React Router)
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Mở cổng mặc định của Nginx
-EXPOSE 80
-
-# Chạy Nginx
-CMD ["nginx", "-g", "daemon off;"]
+    WORKDIR /app
+    
+    # Copy package files
+    COPY package.json package-lock.json* pnpm-lock.yaml* yarn.lock* ./
+    
+    # Cài dependencies
+    RUN npm install
+    
+    # Copy toàn bộ source code vào container
+    COPY . .
+    
+    # Nhận biến môi trường từ --build-arg
+    ARG VITE_API_ENDPOINT
+    ENV VITE_API_ENDPOINT=$VITE_API_ENDPOINT
+    
+    # Tạo file .env để Vite đọc
+    RUN echo "VITE_API_ENDPOINT=$VITE_API_ENDPOINT" > .env
+    
+    # Build ứng dụng React
+    RUN npm run build
+    
+    # --- Production stage ---
+    FROM nginx:alpine
+    
+    # Copy file build vào nginx
+    COPY --from=builder /app/dist /usr/share/nginx/html
+    
+    # Copy custom nginx config (React Router SPA)
+    COPY nginx.conf /etc/nginx/conf.d/default.conf
+    
+    EXPOSE 80
+    
+    CMD ["nginx", "-g", "daemon off;"]
+    
